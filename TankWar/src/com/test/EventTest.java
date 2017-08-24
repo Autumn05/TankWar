@@ -6,6 +6,7 @@ import java.awt.event.*;
 
 public class EventTest extends JFrame implements ActionListener{
 
+
 	EventPanel ep = null;
 	JButton btn1 = null;
 	JButton btn2 = null;
