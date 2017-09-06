@@ -1,6 +1,10 @@
 package com.mytankwar.bullet;
 
-public abstract class Bullet {
+import java.awt.Graphics;
+
+import com.mytankwar.tank.TankConstants;
+
+public class Bullet implements Runnable{
 
 	/**
 	 * 子弹的等级
@@ -72,6 +76,49 @@ public abstract class Bullet {
 		this.direction = direction;
 	}
 	
+	public void draw(Graphics g,int direct, int x, int y){	
+		switch(direct){
+		case TankConstants.TOWARDS_UP:
+//			向上 
+			g.fillOval(x+5, y+10, 3, 3);
+			break;
+		case TankConstants.TOWARDS_DOWN:
+//			向上
+			g.fillOval(x+5, y+10, 3, 3);
+			break;
+		case TankConstants.TOWARDS_LEFT:
+//			向上
+			g.fillOval(x+10, y+5, 3, 3);
+			break;
+		case TankConstants.TOWARDS_RIGHT:
+//			向上
+			g.fillOval(x+10, y+5, 3, 3);
+			break;
+		default:
+//			向上 
+			g.fillOval(x+5, y+10, 3, 3);
+		}
+	}
+
+	@Override
+	public void run() {
+		switch(direction){
+        case TankConstants.TOWARDS_UP: 
+        	y -= speed;
+        	break;
+        case TankConstants.TOWARDS_DOWN: 
+        	y += speed;
+        	break;
+        case TankConstants.TOWARDS_LEFT: 
+        	x -= speed;
+        	break;
+        case TankConstants.TOWARDS_RIGHT: 
+        	x += speed;
+        	break;
+		}
+    	System.out.println("当前子弹" + "MOVE,direction是" + direction);
+		
+	}
 	
 	
 }

@@ -6,7 +6,7 @@ public class Enemy extends Tank {
 
 	public Enemy(int x, int y) {
 		super(x, y);
-		this.setDirection(TankConstants.TOWARDS_DOWN);
+		this.setDir(TankConstants.TOWARDS_DOWN);
 		this.setColor(Color.BLUE);
 		this.setSpeed(5);
 	}
@@ -16,7 +16,6 @@ public class Enemy extends Tank {
 		int i = 20;
 		while(i>0){
 			this.move();
-			System.out.println("move");
 			i--;
 			try {
 				Thread.sleep(1000);

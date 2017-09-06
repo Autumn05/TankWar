@@ -16,7 +16,7 @@ public class War extends JFrame {
 		this.setSize(400, 400);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		new Thread(bf).start();
+//		new Thread(bf).start();
 	}
 
 	public static void main(String[] args) {

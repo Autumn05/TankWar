@@ -8,7 +8,7 @@ public class Friend extends Tank {
 
 	public Friend(int x, int y) {
 		super(x, y);
-		this.setDirection(TankConstants.TOWARDS_UP);
+		this.setDir(TankConstants.TOWARDS_UP);
 		this.setColor(Color.RED);
 		this.setSpeed(20);
 	}

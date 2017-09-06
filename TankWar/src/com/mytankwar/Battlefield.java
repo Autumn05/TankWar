@@ -1,43 +1,45 @@
 package com.mytankwar;
 
 import java.awt.Graphics;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
-import com.mytankwar.tank.Enemy;
-import com.mytankwar.tank.Friend;
-import com.mytankwar.tank.TankConstants;
+import com.mytankwar.tank.*;
+import com.mytankwar.bullet.*;
 import java.awt.event.*;
 
 public class Battlefield extends JPanel implements KeyListener,Runnable {
 	Friend friend = null;
-	ArrayList<Enemy> al = new ArrayList<Enemy>();
+	ArrayList<Enemy> enemys = new ArrayList<Enemy>();
 	int enemyNum = 5;
+	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
 	public Battlefield(){
 		friend = new Friend(50, 250);
 		for(int i =0; i < enemyNum; i++){
 			Enemy enemy = new Enemy((i+1)*50, 50);
-			al.add(enemy);
-			new Thread(enemy).start();
+			enemys.add(enemy);
+//			new Thread(enemy).start();
 		}
-		
 	}
 	
 	public void paint(Graphics g){
 		super.paint(g);
 		g.fillRect(0, 0, 400, 400);
-		friend.draw(g, friend.getDirection(),friend.getX(), friend.getY());
-		for(Enemy enemy: al){
-			enemy.draw(g, enemy.getDirection(),enemy.getX(), enemy.getY());
-		}	
+		friend.draw(g, friend.getDir(),friend.getX(), friend.getY());
+		for(Enemy enemy: enemys){
+			enemy.draw(g, enemy.getDir(),enemy.getX(), enemy.getY());
+		}
+		
+		for(Bullet bullet: bullets){
+			bullet.draw(g, bullet.getDirection(),bullet.getX(), bullet.getY());
+		}
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		System.out.println("Typed");	
+	
 	}
 
 	@Override
@@ -55,10 +57,14 @@ public class Battlefield extends JPanel implements KeyListener,Runnable {
         case KeyEvent.VK_RIGHT: 
         	friend.setDirection(TankConstants.TOWARDS_RIGHT); 
         	break;
+        case KeyEvent.VK_F : 
+        	friend.setDirection(TankConstants.STOP); 
+        	friend.fire(); 
+        	break;	
         default: 
-        	;
+        	friend.setDirection(TankConstants.STOP); 
        }
-    	friend.move();
+		friend.move();
 		this.repaint();
 	}
 
@@ -78,4 +84,5 @@ public class Battlefield extends JPanel implements KeyListener,Runnable {
 			this.repaint();
 		}
 	}
+
 }
